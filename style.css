@@ -609,4 +609,24 @@ footer {
     font-style: italic;
     color: #6c757d;
     margin-top: 0.5rem;
+
+}
+/* Quiz History */
+.quiz-history {
+  margin-top: 1rem;
+}
+
+.quiz-result {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-result small {
+  color: #666;
 }
