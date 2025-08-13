@@ -246,4 +246,145 @@ document.addEventListener('DOMContentLoaded', function() {
   
   document.getElementById('next-btn').addEventListener('click', nextQuestion);
   document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+
 });
+
+// Local Storage Quiz System
+document.addEventListener('DOMContentLoaded', function() {
+  // Premade quizzes data
+  const premadeQuizzes = {
+    math: {
+      title: "Mathematics Quiz",
+      questions: [
+        {
+          text: "What is 2 + 2?",
+          options: ["3", "4", "5", "6"],
+          answer: 2
+        },
+        {
+          text: "What is 3 × 5?",
+          options: ["10", "15", "20", "25"],
+          answer: 2
+        }
+      ]
+    },
+    science: {
+      title: "Science Quiz",
+      questions: [
+        {
+          text: "What is H₂O?",
+          options: ["Gold", "Water", "Salt", "Oxygen"],
+          answer: 2
+        }
+      ]
+    }
+  };
+
+  // Initialize quiz buttons
+  document.querySelectorAll('.quiz-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const subject = this.dataset.subject;
+      startQuiz(premadeQuizzes[subject]);
+    });
+  });
+
+  // Quiz functions
+  function startQuiz(quizData) {
+    // Store quiz in session
+    sessionStorage.setItem('currentQuiz', JSON.stringify({
+      ...quizData,
+      startTime: Date.now(),
+      answers: new Array(quizData.questions.length).fill(null)
+    }));
+    
+    displayQuiz(quizData);
+  }
+
+  function displayQuiz(quiz) {
+    const modal = document.getElementById('quizModal');
+    document.getElementById('quizTitle').textContent = quiz.title;
+    
+    // Display questions
+    const questionsHTML = quiz.questions.map((q, i) => `
+      <div class="question">
+        <h4>${i+1}. ${q.text}</h4>
+        <div class="options">
+          ${q.options.map((opt, j) => `
+            <div class="option" data-q="${i}" data-a="${j}">
+              ${opt}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+    
+    document.getElementById('quizQuestions').innerHTML = questionsHTML;
+    
+    // Add option selection
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const qIndex = parseInt(this.dataset.q);
+        const aIndex = parseInt(this.dataset.a);
+        
+        // Update UI
+        this.parentNode.querySelectorAll('.option').forEach(o => 
+          o.classList.remove('selected'));
+        this.classList.add('selected');
+        
+        // Save answer
+        const quiz = JSON.parse(sessionStorage.getItem('currentQuiz'));
+        quiz.answers[qIndex] = aIndex + 1;
+        sessionStorage.setItem('currentQuiz', JSON.stringify(quiz));
+      });
+    });
+    
+    modal.style.display = 'block';
+  }
+
+  // Submit quiz
+  document.getElementById('submitQuiz').addEventListener('click', function() {
+    const quiz = JSON.parse(sessionStorage.getItem('currentQuiz'));
+    if (!quiz) return;
+    
+    // Calculate score
+    let correct = 0;
+    quiz.questions.forEach((q, i) => {
+      if (quiz.answers[i] === q.answer) correct++;
+    });
+    
+    const score = Math.round((correct / quiz.questions.length) * 100);
+    const timeTaken = Math.floor((Date.now() - quiz.startTime) / 1000);
+    
+    // Save result
+    saveQuizResult({
+      title: quiz.title,
+      score: score,
+      date: new Date().toISOString(),
+      correct: correct,
+      total: quiz.questions.length
+    });
+    
+    // Show result
+    alert(`You scored ${score}% (${correct}/${quiz.questions.length})`);
+    closeQuizModal();
+    updateDashboard();
+  });
+
+  // Close modal
+  document.querySelector('.close').addEventListener('click', closeQuizModal);
+});
+
+// Local storage functions
+function saveQuizResult(result) {
+  const history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+  history.unshift(result); // Add newest first
+  localStorage.setItem('quizHistory', JSON.stringify(history));
+}
+
+function getQuizHistory() {
+  return JSON.parse(localStorage.getItem('quizHistory') || '[]');
+}
+
+function closeQuizModal() {
+  document.getElementById('quizModal').style.display = 'none';
+}
