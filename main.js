@@ -23,4 +23,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (urlParams.has('registered')) {
         alert('Registration successful! Please login with your new account.');
     }
+
 });
+// Update dashboard with local results
+function updateDashboard() {
+  const history = getQuizHistory();
+  const historyElement = document.getElementById('quizHistory');
+  
+  if (historyElement) {
+    historyElement.innerHTML = history.slice(0, 5).map(quiz => `
+      <div class="quiz-result">
+        <strong>${quiz.title}</strong>
+        <span>${quiz.score}% (${quiz.correct}/${quiz.total})</span>
+        <small>${new Date(quiz.date).toLocaleDateString()}</small>
+      </div>
+    `).join('');
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', updateDashboard);
