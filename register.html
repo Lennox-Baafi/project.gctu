@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LI_Edu system - Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <div class="auth-container scale-in">
+        <h1>Create an Account</h1>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" required>
+            </div>
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="regUserType">I am a:</label>
+                <select id="regUserType" required>
+                    <option value="">Select...</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const userType = document.getElementById('regUserType').value;
+            
+            registerUser(name, email, password, userType);
+        });
+
+        
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const userType = document.getElementById('regUserType').value;
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering...';
+        
+        registerUser(name, email, password, userType)
+            .catch(error => {
+                // Reset button state if registration fails
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register';
+            });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    // Ensure DB is initialized
+    if (!window.db) {
+        initDB().catch(error => {
+            console.error('Database initialization failed:', error);
+            alert('Application error. Please refresh the page.');
+        });
+    }
+});
+    </script>
+</body>
+</html>

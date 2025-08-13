@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LI_Edu system - Course Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LI_Edu system</div>
+        <nav>
+            <ul>
+                <li><a href="student.html" id="backLink">Back to Dashboard</a></li>
+                <li><a href="login.html" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="notes-container">
+            <h1 class="fade-in">Course Notes</h1>
+            
+            <div id="notesControls" class="fade-in">
+                <div class="search-notes">
+                    <input type="text" id="searchNotes" placeholder="Search notes...">
+                    <button id="searchBtn" class="btn">Search</button>
+                </div>
+                
+                <div class="filter-notes">
+                    <label for="subjectFilter">Filter by Subject:</label>
+                    <select id="subjectFilter">
+                        <option value="all">All Subjects</option>
+                        <option value="math">Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+                
+                <div id="teacherControls" class="hidden">
+                    <button id="addNoteBtn" class="btn">Add New Note</button>
+                </div>
+            </div>
+            
+            <div class="notes-list" id="notesList">
+                <!-- Notes will be populated by JavaScript -->
+            </div>
+            
+            <div id="noteEditor" class="hidden editor-slide-in">
+                <h2 id="editorTitle">New Note</h2>
+                <form id="noteForm">
+                    <div class="form-group">
+                        <label for="noteTitle">Title</label>
+                        <input type="text" id="noteTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteSubject">Subject</label>
+                        <select id="noteSubject" required>
+                            <option value="math">Mathematics</option>
+                            <option value="science">Science</option>
+                            <option value="history">History</option>
+                            <option value="english">English</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteContent">Content</label>
+                        <textarea id="noteContent" rows="10" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Save Note</button>
+                    <button type="button" id="cancelEdit" class="btn">Cancel</button>
+                </form>
+            </div>
+            
+            <div id="noteViewer" class="hidden viewer-fade-in">
+                <h2 id="viewNoteTitle"></h2>
+                <p class="note-meta">Subject: <span id="viewNoteSubject"></span></p>
+                <div class="note-content" id="viewNoteContent"></div>
+                <button id="closeViewer" class="btn">Close</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 SmartStudy. All rights reserved.</p>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="notes.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkAuth();
+            
+            // Set up back link based on user type
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const backLink = document.getElementById('backLink');
+            backLink.href = currentUser.userType === 'teacher' ? 'teacher.html' : 'student.html';
+            
+            // Show teacher controls if user is a teacher
+            if (currentUser.userType === 'teacher') {
+                document.getElementById('teacherControls').classList.remove('hidden');
+            }
+            
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Initialize notes functionality
+            initNotes();
+        });
+    </script>
+</body>
+</html>

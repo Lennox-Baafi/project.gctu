@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LI_Edu system - Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LI_Edu system</div>
+        <nav>
+            <ul>
+                <li><a href="student.html">Dashboard</a></li>
+                <li><a href="notes.html">Notes</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="login.html" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="welcome fade-in">
+            <h1>Welcome, <span id="studentName"></span></h1>
+            <p>Ready to continue your learning journey?</p>
+        </section>
+
+        <section class="dashboard">
+            <div class="stats">
+                <div class="stat-card slide-in-left">
+                    <h3>Quizzes Taken</h3>
+                    <p id="quizzesTaken">0</p>
+                </div>
+                <div class="stat-card slide-in-right">
+                    <h3>Average Score</h3>
+                    <p id="averageScore">0%</p>
+                </div>
+                <div class="stat-card slide-in-left">
+                    <h3>Notes Viewed</h3>
+                    <p id="notesViewed">0</p>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <ul id="activityList" class="fade-in">
+                    <!-- Activities will be populated by JavaScript -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 SmartStudy. All rights reserved.</p>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkAuth();
+            
+            // Load student data
+            loadStudentDashboard();
+            
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+        });
+        
+        function loadStudentDashboard() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('studentName').textContent = currentUser.name;
+                
+                // In a real app, these would come from the database
+                document.getElementById('quizzesTaken').textContent = currentUser.quizzesTaken || 0;
+                document.getElementById('averageScore').textContent = currentUser.averageScore ? `${currentUser.averageScore}%` : '0%';
+                document.getElementById('notesViewed').textContent = currentUser.notesViewed || 0;
+                
+                // Mock activity
+                const activities = [
+                    'Completed Math Quiz with 85% score',
+                    'Viewed Biology notes',
+                    'Started Chemistry Quiz'
+                ];
+                
+                const activityList = document.getElementById('activityList');
+                activities.forEach(activity => {
+                    const li = document.createElement('li');
+                    li.textContent = activity;
+                    activityList.appendChild(li);
+                });
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!currentUser) {
+        alert('Please register or login first.');
+        window.location.href = 'register.html';
+        return;
+    }
+    
+    // Rest of your dashboard initialization code...
+});
+    </script>
+</body>
+</html>

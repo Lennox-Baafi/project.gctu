@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LI_Edu system - Teacher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LI_Edu system</div>
+        <nav>
+            <ul>
+                <li><a href="teacher.html">Dashboard</a></li>
+                <li><a href="notes.html">Manage Notes</a></li>
+                <li><a href="quiz.html">Manage Quizzes</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="welcome fade-in">
+            <h1>Welcome, Professor <span id="teacherName"></span></h1>
+            <p>Manage your courses and track student progress.</p>
+        </section>
+
+        <section class="dashboard">
+            <div class="stats">
+                <div class="stat-card slide-in-left">
+                    <h3>Students</h3>
+                    <p id="studentCount">0</p>
+                </div>
+                <div class="stat-card slide-in-right">
+                    <h3>Quizzes Created</h3>
+                    <p id="quizzesCreated">0</p>
+                </div>
+                <div class="stat-card slide-in-left">
+                    <h3>Notes Shared</h3>
+                    <p id="notesShared">0</p>
+                </div>
+            </div>
+
+            <div class="teacher-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="quiz.html?action=create" class="btn">Create New Quiz</a>
+                    <a href="notes.html?action=create" class="btn">Upload New Notes</a>
+                    <a href="#" class="btn">View Student Progress</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 SmartStudy. All rights reserved.</p>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in and is a teacher
+            checkAuth(true);
+            
+            // Load teacher data
+            loadTeacherDashboard();
+            
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+        });
+        
+        function loadTeacherDashboard() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('teacherName').textContent = currentUser.name;
+                
+                // In a real app, these would come from the database
+                document.getElementById('studentCount').textContent = currentUser.students || 0;
+                document.getElementById('quizzesCreated').textContent = currentUser.quizzesCreated || 0;
+                document.getElementById('notesShared').textContent = currentUser.notesShared || 0;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!currentUser) {
+        alert('Please register or login first.');
+        window.location.href = 'register.html';
+        return;
+    }
+    
+    // Rest of your dashboard initialization code...
+});
+    </script>
+</body>
+</html>

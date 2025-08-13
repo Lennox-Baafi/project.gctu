@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LI_Edu system - Quizzes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LI_Edu system</div>
+        <nav>
+            <ul>
+                <li><a href="student.html" id="backLink">Back to Dashboard</a></li>
+                <li><a href="login.html" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="quiz-container">
+            <h1 class="fade-in" id="quizTitle">Available Quizzes</h1>
+                
+                        <!-- Subject Selection -->
+        <section id="subject-selection">
+            <h2>Select a Subject</h2>
+            <div class="subject-buttons">
+                <button id="math-btn" class="subject-btn">Mathematics</button>
+                <button id="science-btn" class="subject-btn">Science</button>
+                <button id="history-btn" class="subject-btn">History</button>
+            </div>
+        </section>
+
+        <!-- Quiz Container -->
+        <section id="quiz-container" class="hidden">
+            <h2 id="quiz-title"></h2>
+            
+            <div class="quiz-progress">
+                <div id="progress-bar"></div>
+                <span id="question-number"></span>
+            </div>
+            
+            <div class="question">
+                <p id="question-text"></p>
+                <div id="options-container" class="options"></div>
+            </div>
+            
+            <button id="next-btn" class="btn">Next Question</button>
+        </section>
+
+        <!-- Results Container -->
+        <section id="results-container" class="hidden">
+            <h2>Quiz Results</h2>
+            <div class="score-card">
+                <p id="score"></p>
+                <p id="feedback"></p>
+            </div>
+            
+            <div id="answer-review" class="answer-review"></div>
+            
+            <button id="restart-btn" class="btn">Take Another Quiz</button>
+        </section>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 SmartStudy. All rights reserved.</p>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="quiz.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkAuth();
+            
+            // Set up back link based on user type
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const backLink = document.getElementById('backLink');
+            backLink.href = currentUser.userType === 'teacher' ? 'teacher.html' : 'student.html';
+            
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Initialize quiz functionality
+            initQuiz();
+        });
+    </script>
+</body>
+</html>

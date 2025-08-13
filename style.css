@@ -1,0 +1,612 @@
+/* Global Styles */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #166088;
+    --accent-color: #4fc3f7;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+main {
+    padding: 2rem;
+    min-height: calc(100vh - 120px);
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.auth-container {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.news-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.news-card h3 {
+    padding: 1rem 1rem 0;
+    color: var(--primary-color);
+}
+
+.news-card p {
+    padding: 0 1rem 1rem;
+    color: #666;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+}
+
+.feature {
+    flex: 1;
+    min-width: 250px;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.dashboard .stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.stat-card p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.recent-activity {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.recent-activity h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.recent-activity ul {
+    list-style: none;
+}
+
+.recent-activity ul li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.teacher-actions {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.teacher-actions h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subject-list {
+    margin-bottom: 2rem;
+}
+
+.subject-list h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.subject-list ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.subject-list ul li {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--light-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.subject-list ul li:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.quiz-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.quiz-card {
+    background-color: var(--light-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.quiz-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.quiz-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quiz-progress {
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.question-container {
+    margin-bottom: 2rem;
+}
+
+.question-container h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.options {
+    display: grid;
+    gap: 1rem;
+}
+
+.option {
+    padding: 1rem;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+.result-card {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--light-color);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.result-card h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.notes-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.search-notes {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-notes input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-notes {
+    margin-bottom: 1.5rem;
+}
+
+.filter-notes select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+}
+
+.notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.note-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.note-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.note-card .note-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.note-card .note-preview {
+    color: #333;
+    font-size: 0.95rem;
+    
+    overflow: hidden;
+}
+
+.note-editor, .note-viewer {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.note-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.note-content {
+    line-height: 1.8;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav ul {
+        margin-top: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .features {
+        flex-direction: column;
+    }
+    
+    .dashboard .stats {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Quiz Specific Styles */
+.subject-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.subject-btn {
+    padding: 1rem 2rem;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.subject-btn:hover {
+    background-color: #166088;
+    transform: translateY(-2px);
+}
+
+.quiz-progress {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#progress-bar {
+    height: 10px;
+    background-color: #4a6fa5;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: width 0.3s;
+}
+
+.options {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.option {
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option:hover {
+    background-color: #e0e0e0;
+}
+
+.option.selected {
+    background-color: #4a6fa5;
+    color: white;
+}
+
+.score-card {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.answer-review {
+    margin: 2rem 0;
+}
+
+.review-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.review-item.correct {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.review-item.incorrect {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+.explanation {
+    font-style: italic;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
